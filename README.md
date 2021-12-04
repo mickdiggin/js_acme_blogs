@@ -3,7 +3,7 @@
 [![Remix on Glitch](https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg)](https://glitch.com/edit/#!/import/github/gitdagray/js_acme_blogs)
 
 **Start by clicking the Remix on Glitch button above.**
-
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a8a64962-bccb-430f-95d5-28361020a228/deploy-status)](https://app.netlify.com/sites/zealous-mcclintock-b97425/deploys)
 _Once you are working with your own copy of the project on Glitch..._
 
 **Follow the directions available in Blackboard** 
