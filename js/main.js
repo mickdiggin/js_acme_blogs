@@ -35,7 +35,7 @@ function toggleCommentSection(postId)
     {
         return undefined;
     }
-    let theSection = document.querySelector(`section[data-post-id='${postId}']`);
+    let theSection = document.querySelector(`section[data-post-id="${postId}"]`);
 
     if (theSection)
     {
@@ -53,7 +53,7 @@ function toggleCommentButton(postId)
 {
     if (!postId) return undefined;
     
-    let theButton = document.querySelector(`button[data-post-id='${postId}']`);
+    let theButton = document.querySelector(`button[data-post-id="${postId}"]`);
 
     if(!theButton) return null;
 
@@ -79,7 +79,7 @@ function deleteChildElements(parentElement)
 
 function addButtonListeners()
 {
-    let allButtons = document.querySelectorAll("main > button");
+    let allButtons = document.querySelector("main").querySelectorAll("button");
 
     if (allButtons)
     {
@@ -96,7 +96,7 @@ function addButtonListeners()
 
 function removeButtonListeners()
 {
-    let allButtons = document.querySelectorAll("main > button");
+    let allButtons = document.querySelector("main").querySelectorAll("button");
 
     if (allButtons)
     {
@@ -184,18 +184,16 @@ async function getUserPosts(theUserId)
         });
         
         let userPosts = await userPostsRaw.json();
-
         let finalArr = [];
-
-        userPosts.forEach(function (post) {
-            if (post.userId === theUserId)
+        
+        for (let i = 0; i < userPosts.length; i++)
+        {
+            if (userPosts[i].userId == theUserId)
             {
-                finalArr.push(post);
+                finalArr.push(userPosts[i]);
             }
-        });
-
+        }
         return finalArr;
-
     }
     catch (error)
     {
@@ -322,17 +320,20 @@ async function createPosts(postsData)
 
 async function displayPosts(posts)
 {
+    console.log(posts);
     let theMain = document.querySelector("main");
 
     let element;
-    if(posts)
+    if(posts && posts.length > 0)
     {
         element = await createPosts(posts);
     }
-    else if(!posts)
+    else if(!posts || posts.length === 0)
     {
-        element = document.getElementsByClassName("default-text");
-        element = element[0];
+        element = theMain.querySelector("p");
+        element = document.createElement("p");
+        element.textContent = "Select an Employee to display their posts.";
+        element.classList.add("default-text");
     }
 
     theMain.append(element);
@@ -392,7 +393,7 @@ function initApp()
 {
     initPage();
     let selectMenu = document.getElementById("selectMenu");
-    selectMenu.addEventListener("change", selectMenuChangeEventHandler);
+    selectMenu.addEventListener("change", (event) => {selectMenuChangeEventHandler(event)}, false);
 }
 
 document.addEventListener("DOMContentLoaded", initApp());
